@@ -12,9 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('principal.client');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/client', 'ClientController@index')->name('home');
+Route::resource('/client', 'ClientController');
+Route::resource('/cities', 'CityController');

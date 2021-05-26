@@ -7,6 +7,10 @@ use App\Models\City;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +30,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        return view('principal.createCity');
     }
 
     /**
@@ -37,7 +41,15 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cities = new City();
+
+        $cities->cod = $request->codCity;
+        $cities->name = $request->nameCity;
+
+        $cities->save();
+
+        return redirect()->route('cities.index');
+
     }
 
     /**
@@ -59,7 +71,9 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cities = City::FindOrFail($id);
+
+        return view('principal.editCity', compact('cities'));
     }
 
     /**
@@ -71,7 +85,14 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cities = City::FindOrFail($id);
+
+        $cities->cod = $request->codCity;
+        $cities->name = $request->nameCity;
+
+        $cities->update();
+
+        return redirect()->route('cities.index');
     }
 
     /**
@@ -82,6 +103,10 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cities = City::FindOrFail($id);
+
+        $cities->delete();
+
+        return redirect()->route('cities.index');
     }
 }

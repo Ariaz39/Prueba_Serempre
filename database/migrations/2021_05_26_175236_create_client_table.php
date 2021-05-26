@@ -15,7 +15,12 @@ class CreateClientTable extends Migration
     {
         Schema::create('client', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('cod');
+            $table->string('name', 120);
+            $table->bigInteger('cities_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('cities_id')->references('id')->on('cities');
         });
     }
 

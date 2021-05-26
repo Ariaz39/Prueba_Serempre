@@ -5,8 +5,9 @@
 use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(\App\Models\City::class, function (Faker $faker) {
     return [
-        //
+        'cod' => mt_rand(1,200),
+        'name' => $faker->city,
     ];
 });

@@ -16,7 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Auth::routes(['verify'=>true]);
 
-Route::get('/client', 'ClientController@index')->name('home');
-Route::resource('/client', 'ClientController');
-Route::resource('/cities', 'CityController');
+Route::get('/client', 'ClientController@index')->name('home')->middleware('verified');
+Route::resource('/client', 'ClientController')->middleware('verified');
+Route::resource('/cities', 'CityController')->middleware('verified');

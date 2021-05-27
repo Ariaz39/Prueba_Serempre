@@ -12,11 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('client.index');
 });
 
 Auth::routes();
 Auth::routes(['verify'=>true]);
+
 
 Route::get('/client', 'ClientController@index')->name('home')->middleware('verified');
 Route::resource('/client', 'ClientController')->middleware('verified');
